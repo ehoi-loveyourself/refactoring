@@ -1,27 +1,24 @@
 export function printOwing(invoice) {
-  let outstanding = 0;
-
-  // 1. 로그 형식을 고치면 좋을 것 같아.
+  // 1. 배너를 출력하는 기능
   console.log('***********************');
   console.log('**** Customer Owes ****');
   console.log('***********************');
-
-  // 2. 뭔가 기능을 하는 함수를 따로 추출하면 좋을 것 같아
-  // calculate outstanding
+  
+  let outstanding = 0; // 지역변수는 사용하는 곳과 가장 가까운 곳에 두는 것이 좋음 (예전에는 메서드 내에서 사용하는 변수를 한 군데에서 선언하는 게 관행이었다고 함)
+  // calculate outstanding : 2. 총 가격을 더해가는 기능
   for (const o of invoice.orders) {
-    outstanding += o.amount; // 3. outstanding이라는 변수인데 amount에 더하니까 정확히 뭘 하는지 모르겠어
+    outstanding += o.amount;
   }
-
-  // 2. 마찬가지
-  // record due date
+  
+  // 3. record due date : 지금으로부터 30일 뒤를 due date를 계산
   const today = new Date();
   invoice.dueDate = new Date(
     today.getFullYear(),
     today.getMonth(),
     today.getDate() + 30
-  );
+  ); // 객체를 수정하고 있군 -> 객체의 불변성을 지켜주지 못하고 있음
 
-  //print details
+  // 4. print details : 세부사항 출력
   console.log(`name: ${invoice.customer}`);
   console.log(`amount: ${outstanding}`);
   console.log(`due: ${invoice.dueDate.toLocaleDateString()}`);
