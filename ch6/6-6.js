@@ -1,27 +1,5 @@
-// let defaultOwner = { firstName: '마틴', lastName: '파울러' };
-let defaultOwner = new DefaultOwner('마틴', '파울러');
-
-export class DefaultOwner {
-  #firstName;
-  #lastName;
-
-  constructor(firstName, lastName) {
-    this.#firstName = firstName;
-    this.#lastName = lastName;
-  }
-
-  get firstName() {
-    return this.#firstName;
-  }
-
-   get lastName() {
-    return this.#lastName;f
-   }
-}
+let defaultOwner = { firstName: '마틴', lastName: '파울러' };
 
 export function getDefaultOwner() {
-  return defaultOwner;
+  return { ...defaultOwner }; // 얕은 복사
 }
-
-const result = getDefaultOwner();
-console.log(result);
