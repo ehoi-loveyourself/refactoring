@@ -1,8 +1,7 @@
 // [매개변수 객체 만들기]
 
-// 온도 범위를 벗어나는 애들만 읽는다
-export function readingsOutsideRange(station, min, max) {
-  return station.readings.filter((r) => r.temp < min || r.temp > max);
+export function readingsOutsideRange(station, operationPlan) {
+  return station.readings.filter((r) => r.temp < operationPlan.temperatureFloor || r.temp > operationPlan.temperatureCeiling);
 }
 
 const station = {
@@ -23,8 +22,7 @@ const operationPlan = {
 
 const result = readingsOutsideRange(
   station,
-  operationPlan.temperatureFloor,
-  operationPlan.temperatureCeiling
+  operationPlan // 객체의 두 매개변수를 각각 보낼 바에 객체 그 자체를 보낸다.
 );
 
 console.log(result);
