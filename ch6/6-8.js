@@ -1,7 +1,25 @@
 // [매개변수 객체 만들기]
 
-export function readingsOutsideRange(station, operationPlan) {
-  return station.readings.filter((r) => r.temp < operationPlan.temperatureFloor || r.temp > operationPlan.temperatureCeiling);
+export function readingsOutsideRange(station, range) {
+  return station.readings.filter((r) => r.temp < range.min || r.temp > range.max);
+}
+
+export class NumberRange {
+  #min;
+  #max;
+
+  constructor(min, max) {
+    this.#min = min;
+    this.#max = max;
+  }
+
+  get min() {
+    return this.#min;
+  }
+
+  get max() {
+    return this.#max;
+  }
 }
 
 const station = {
@@ -15,14 +33,7 @@ const station = {
   ],
 };
 
-const operationPlan = {
-  temperatureFloor: 51,
-  temperatureCeiling: 53,
-};
+const operationPlan = new NumberRange(51, 53);
 
-const result = readingsOutsideRange(
-  station,
-  operationPlan // 객체의 두 매개변수를 각각 보낼 바에 객체 그 자체를 보낸다.
-);
-
+const result = readingsOutsideRange(station, operationPlan);
 console.log(result);
