@@ -1,15 +1,18 @@
 export function printOwing(invoice) {
   let outstanding = 0;
 
+  // 1. 로그 형식을 고치면 좋을 것 같아.
   console.log('***********************');
   console.log('**** Customer Owes ****');
   console.log('***********************');
 
+  // 2. 뭔가 기능을 하는 함수를 따로 추출하면 좋을 것 같아
   // calculate outstanding
   for (const o of invoice.orders) {
     outstanding += o.amount;
   }
 
+  // 2. 마찬가지
   // record due date
   const today = new Date();
   invoice.dueDate = new Date(
