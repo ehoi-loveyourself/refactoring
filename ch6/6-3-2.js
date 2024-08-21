@@ -11,10 +11,9 @@ export class Order {
   }
 
   get price() {
-    return (
-      this.quantity * this.itemPrice -
-      Math.max(0, this.quantity - 500) * this.itemPrice * 0.05 +
-      Math.min(this.quantity * this.itemPrice * 0.1, 100)
-    );
+    const basePrice = this._data.quantity * this._data.itemPrice;
+    const discount = Math.max(0, this._data.quantity - 500) * this._data.itemPrice * 0.05;
+    const shipping = Math.min(this._data.quantity * this._data.itemPrice * 0.1, 100);
+    return basePrice - discount + shipping;
   }
 }
