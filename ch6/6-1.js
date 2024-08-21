@@ -1,27 +1,38 @@
 export function printOwing(invoice) {
-  // 1. 배너를 출력하는 기능
+  printBanner();
+  let outstanding = calculateOutstanding(invoice);
+  recordDueDate(invoice);
+  printDetails(invoice, outstanding);
+}
+
+function printBanner() {
   console.log('***********************');
   console.log('**** Customer Owes ****');
   console.log('***********************');
-  
-  let outstanding = 0; // 지역변수는 사용하는 곳과 가장 가까운 곳에 두는 것이 좋음 (예전에는 메서드 내에서 사용하는 변수를 한 군데에서 선언하는 게 관행이었다고 함)
-  // calculate outstanding : 2. 총 가격을 더해가는 기능
-  for (const o of invoice.orders) {
-    outstanding += o.amount;
-  }
-  
-  // 3. record due date : 지금으로부터 30일 뒤를 due date를 계산
-  const today = new Date();
-  invoice.dueDate = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() + 30
-  ); // 객체를 수정하고 있군 -> 객체의 불변성을 지켜주지 못하고 있음
+}
 
-  // 4. print details : 세부사항 출력
-  console.log(`name: ${invoice.customer}`);
-  console.log(`amount: ${outstanding}`);
-  console.log(`due: ${invoice.dueDate.toLocaleDateString()}`);
+function calculateOutstanding(invoice) {
+  return invoice.orders.reduce((sum, order) => sum += order.amount, 0);
+  // let result = 0;
+  // for (const o of invoice.orders) {
+  //   result += o.amount;
+  // }
+  // return result;
+}
+
+function recordDueDate(invoice) {
+    const today = new Date();
+    invoice.dueDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + 30
+    );
+}
+
+function printDetails(invoice, outstanding) {
+    console.log(`name: ${invoice.customer}`);
+    console.log(`amount: ${outstanding}`);
+    console.log(`due: ${invoice.dueDate.toLocaleDateString()}`);
 }
 
 const invoice = {
