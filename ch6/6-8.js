@@ -1,7 +1,7 @@
 // [매개변수 객체 만들기]
 
 export function readingsOutsideRange(station, range) {
-  return station.readings.filter((r) => r.temp < range.min || r.temp > range.max);
+  return station.readings.filter((r) => !range.contains(r.temp)); // 각 reading이 range 범위에서 벗어나는지 확인하는 메서드까지 NumberRange가 관리해주면 좋다
 }
 
 export class NumberRange {
@@ -19,6 +19,10 @@ export class NumberRange {
 
   get max() {
     return this.#max;
+  }
+
+  contains(num) {
+    return num >= this.#min && num <= this.#max;
   }
 }
 
