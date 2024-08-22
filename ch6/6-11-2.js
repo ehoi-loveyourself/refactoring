@@ -25,9 +25,9 @@ function parseCommand(args) {
   };
 }
 
-function countOrders(command) {
-  const rawData = fs.readFileSync(command.fileName);
+function countOrders({ fileName, countReadyOnly }) {
+  const rawData = fs.readFileSync(fileName);
   const orders = JSON.parse(rawData);
-  const filtered = command.countReadyOnly ? orders.filter((order) => order.status === 'ready') : orders;
+  const filtered = countReadyOnly ? orders.filter((order) => order.status === 'ready') : orders;
   console.log(filtered.length);
 }
