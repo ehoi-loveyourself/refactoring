@@ -37,5 +37,5 @@ export class Course {
 }
 
 const ellie = new Person('엘리');
-ellie.courses.push(new Course('리팩토링', true));
+ellie.courses.push(new Course('리팩토링', true)); // 여기 ellie.courses에 접근해서 push를 할 수 있으면 안될 거 같은데!
 console.log(ellie.courses.length);
