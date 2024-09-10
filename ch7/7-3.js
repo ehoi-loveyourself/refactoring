@@ -14,6 +14,26 @@ export class Order {
   }
 }
 
+// [심화]
+// 여기서 좀 더 나아가서 priority 라는 기본형인 문자열을 객체로 관리를 하는 건 어떨까? 여기까지 리팩토링도 할 수 있음
+class Priority {
+  #value;
+  constructor(value) {
+    if (Priority.legalValues.contains(value)) {
+      this.value = value;
+    } else {
+      throw new Error(`${value} is invalid for Priority.`);
+    }
+  }
+
+  // 그런데 아무 value나 넣고 Priority로 생성하면 안되니까 규정을 둬야 해
+  static legalValues() {
+    return ['low', 'normal', 'high', 'rush'];
+  }
+}
+// TypeScript나 Enum을 사용해서 좀 더 tight하게 만들 수도 있음
+
+
 const orders = [
   new Order({ priority: 'normal' }),
   new Order({ priority: 'high' }),
