@@ -1,6 +1,6 @@
 export class Order {
   constructor(data) {
-    this.priority = data.priority;
+    this.priority = data;
   }
 
   // 1. 여기 Order 클래스 내부에서 highPriorityCount를 구할 수 있도록 메서드를 제공하면 좋을 것 같은데 어떻게 하면 될지 모르겠다.
@@ -50,9 +50,9 @@ class Priority {
 
 
 const orders = [
-  new Order({ priority: 'normal' }),
-  new Order({ priority: 'high' }),
-  new Order({ priority: 'rush' }),
+  new Order(new Priority('normal')),
+  new Order(new Priority('high')),
+  new Order(new Priority('rush')),
 ];
 
 // 2. order의 우선순위를 리턴해주는 로직이 외부에 있다. 이것을 행할 책임이 있는 곳은 어디인가? Order가 아닐까? Order 안으로 들어가야 한다!
