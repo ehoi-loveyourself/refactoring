@@ -17,6 +17,7 @@ export class Order {
 
 // [심화]
 // 여기서 좀 더 나아가서 priority 라는 기본형인 문자열을 객체로 관리를 하는 건 어떨까? 여기까지 리팩토링도 할 수 있음
+// => 근데 이런 건 정말 정말 정말 필요할 때만 하면 되지 무조건 해야 하는 건 절대 아님
 class Priority {
   #value;
   constructor(value) {
